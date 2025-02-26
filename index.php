@@ -29,10 +29,10 @@ if($methode == "POST") {
 
     <form action="POST">
         <label for="nom">Nom</label>
-        <input type="text" id="prenom" name="leprenom">
+        <input type="text" id="nom" name="lenom">
         
         <label for="prenom">Prenom</label>
-        <input type="text" id="nom" name="lenom">
+        <input type="text" id="prenom" name="leprenom">
         
         <label for="mdp">Mot de passe</label>
         <input type="text" id="mdp" name="motdepasse">

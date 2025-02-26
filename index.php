@@ -1,5 +1,8 @@
 <?php
 require_once './fonctions.php';
+require_once './header.php';
+require_once './footer.php';
+
 
 [$nom, $prenom, $mail, $mdp] = index();
 

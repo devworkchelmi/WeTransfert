@@ -1,7 +1,5 @@
 <?php
 require_once './fonctions.php';
-[$produits] = produit();
-[$nom, $prenom, $telephone, $email, $feminin, $masculin, $date] = contact();
 ?>
 
 <!DOCTYPE html>
@@ -14,9 +12,10 @@ require_once './fonctions.php';
 <body>
     <header>
         <ul id="my-navigation" class="my-navigation">
-            <li id="Accueil" class="my-nav"><a href="index.php">Accueil</a></li>
-            <li id="produits" class="my-nav"><a href="produits.php">Produits</a></li>
-            <li id="contact" class="my-nav"><a href="contact.php">contact</a></li>
+            <li id="Accueil" class="my-nav"><a href="index.php">Connexion</a></li>
+            <li id="profil" class="my-nav"><a href="profil.php">Profil</a></li>
+            <li id="creer_compte" class="my-nav"><a href="creation-compte.php">Créer</a></li>
+            <li id="telechargement" class="my-nav"><a href="telechargement.php">Téléchargement</a></li>
         </ul>
     </header>
 

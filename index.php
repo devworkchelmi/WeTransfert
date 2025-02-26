@@ -3,11 +3,14 @@ require_once './fonctions.php';
 
 [$nom, $prenom, $mail, $mdp] = index();
 
+
 $methode = $_SERVER["REQUEST_METHOD"];
 if($methode == "POST") {
 
     $nom = filter_input(INPUT_POST, "nom");
     $prenom = filter_input(INPUT_POST, "prenom");
+    $mail = filter_input(INPUT_POST, "mail");
+    $mdp = filter_input(INPUT_POST, "mdp");
 
     var_dump($nom, $prenom);
 }
@@ -25,13 +28,13 @@ if($methode == "POST") {
     <h2>Connexion</h2>
 
     <form action="POST">
-        <label for="nom"></label>
+        <label for="nom">Nom</label>
         <input type="text" id="prenom" name="leprenom">
         
-        <label for="prenom">Nom</label>
+        <label for="prenom">Prenom</label>
         <input type="text" id="nom" name="lenom">
         
-        <label for="mdp">Nom</label>
+        <label for="mdp">Mot de passe</label>
         <input type="text" id="mdp" name="motdepasse">
 
         <input type="submit" value="Envoyer" name="submit">

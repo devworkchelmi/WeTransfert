@@ -27,18 +27,21 @@ if($methode == "POST") {
     <h1>Bienvenue sur WeTransfert</h1>
     <h2>Connexion</h2>
 
-    <form action="POST">
-        <label for="nom">Nom</label>
-        <input type="text" id="nom" name="lenom">
-        
-        <label for="prenom">Prenom</label>
-        <input type="text" id="prenom" name="leprenom">
-        
-        <label for="mdp">Mot de passe</label>
-        <input type="text" id="mdp" name="motdepasse">
+    <section>
+        <form action="POST">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="lenom">
+                
+                <label for="prenom">Prenom</label>
+                <input type="text" id="prenom" name="leprenom">
+                
+                <label for="mdp">Mot de passe</label>
+                <input type="text" id="mdp" name="motdepasse">
 
-        <input type="submit" value="Envoyer" name="submit">
-    </form>
+                <input type="submit" value="Envoyer" name="submit">
+            </form>
+    </section>
+
     
 </body>
 </html>

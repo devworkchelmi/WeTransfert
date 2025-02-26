@@ -1,7 +1,7 @@
 <?php
 require_once './fonctions.php';
+[$fichiers] = listerFichiers();
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,7 +16,8 @@ require_once './fonctions.php';
             <li id="profil" class="my-nav"><a href="profil.php">Profil</a></li>
             <li id="creer_compte" class="my-nav"><a href="creation-compte.php">Créer</a></li>
             <li id="telechargement" class="my-nav"><a href="telechargement.php">Téléchargement</a></li>
+            <input type="button" value="Se deconnecter" id="deconnexion" onclick="deconnexion()">
         </ul>
     </header>
 
-    <main>
+<main>

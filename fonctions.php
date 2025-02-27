@@ -8,19 +8,6 @@ function deconnexion() {
     header('Location: index.php');
 }
 
-// Fonction lister les fichier
-function listerFichiers() {
-    $fichiers = [
-        [
-            "fichier1" => "Premier fichier",
-            "fichier2" => "Deuxième fichier",
-            "fichier3" => "Troisième fichier",
-        ]  
-
-    ];
-    return $fichiers;
-}
-
 // fonction télécharger un ficher
 function uploadFichier() {
     $errorMessage = "";

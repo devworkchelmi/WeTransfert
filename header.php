@@ -1,10 +1,3 @@
-<?php
-require_once './fonctions.php';
-[$fichiers] = listerFichiers();
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-    uploadFichier();
-}
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

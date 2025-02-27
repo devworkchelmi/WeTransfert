@@ -1,6 +1,7 @@
 <?php
 require_once './header.php';
-
+require_once './fonctions.php';
+[$fichiers] = listerFichiers();
 ?>
 
 <h1>Téléchargement</h1>

@@ -8,27 +8,39 @@ $errorMessage = "";
 $confirmationMessage = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     list($errorMessage, $confirmationMessage) = uploadFichier();
+     // Recharger la liste des fichiers après upload
+    $fichiers = scandir("./uploads");
+
+} elseif (isset($_POST['delete'])) { //supprimer des fichiers
+    $confirmationMessage = supprimerFichier($_POST['delete']);
+    // Recharger la liste des fichiers après suppression
+    $fichiers = scandir("./uploads");
 }
+
 ?>
 
 <h1>Téléchargement</h1>
 
 <h2>Vos Fichier :</h2>
 
-<ul id="listFichiers">
+<ul id="fileList">
 <?php if(!empty($fichiers)): ?>
-    <ul>
         <?php foreach($fichiers as $fichier): ?>
-            <li><?= "$fichier"?></li>
+            <?php if ($fichier !== '.' && $fichier !== '..'): ?>
+                <li>
+                    <?= $fichier ?>
+                    <button onclick="deleteFile('<?= $fichier ?>')">Supprimer</button>
+                    <button onclick="downloadFile('<?= $fichier ?>')">Télécharger</button>
+                </li>
+            <?php endif; ?>
         <?php endforeach; ?>
     </ul>
-<?php else: ?>
+        <?php else: ?>
     <p> Il n'y a aucun fichier disponible.</p>
 <?php endif; ?>
 </ul>
+
 <form id="uploadForm" action="telechargement.php" method="POST" enctype="multipart/form-data">
-    <input type="button" value="Télécharger" onclick="">
-    <input type="button" value="Supprimer" onclick="">
     <br>
     <br>
     <label for="file"> Enregistrer un nouveau fichier </label>
@@ -43,8 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <?php endif; ?>
 </form>
 
+
 <?php
 require_once './footer.php';
 ?>
 
-<script src="telechargement.js"></script>   
+

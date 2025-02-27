@@ -53,4 +53,15 @@ function uploadFichier() {
         return array($errorMessage, $confirmationMessage);
     }
 }
+
+function supprimerFichier($fileName) {
+    $filePath = './uploads/' . $fileName;
+    if (file_exists($filePath)) {
+        unlink($filePath);
+        return "Le fichier a été supprimé avec succès.";
+    } else {
+        return "Le fichier n'existe pas.";
+    }
+}
+
 ?>

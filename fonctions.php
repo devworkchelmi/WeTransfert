@@ -1,8 +1,8 @@
 <?php
 function index(){
 
-    $mail = "adresse mail user";
-    $mdp = "mot de passe user";
+    $mail = "adressemailuser";
+    $mdp = "mdpuser";
 
     return [
         $mail,

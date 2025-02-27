@@ -1,6 +1,7 @@
 <?php
 require_once './header.php';
 ?>
+
     <h1>Création de compte</h1>
     <form action="creation-compte.php" method="post">
         <label for="nom">Nom</label>

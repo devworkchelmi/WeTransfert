@@ -1,7 +1,6 @@
 <?php
 require_once './fonctions.php';
 require_once './header.php';
-require_once './footer.php';
 
 
 [$nom, $prenom, $mail, $mdp] = index();
@@ -28,7 +27,7 @@ if($methode == "POST") {
 </head>
 <body>
     <h1>Bienvenue sur WeTransfert</h1>
-    <h2>Connexion</h2>
+    <!-- <h2>Connexion</h2> -->
 
     <section>
         <form action="POST">
@@ -45,6 +44,8 @@ if($methode == "POST") {
             </form>
     </section>
 
-    
+<?php
+    require_once './footer.php';
+?>
 </body>
 </html>

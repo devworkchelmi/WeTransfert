@@ -5,19 +5,33 @@ require_once './header.php';
 <?php
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $identifiant = filter_input(INPUT_POST, "identifiant");
-    $motdepasse = filter_input(INPUT_POST, "motdepasse");
+// Vérification des identifiants après soumission du formulaire de connexion
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST["motdepasse"])) {
+    $identifiant = filter_input(INPUT_POST, "identifiant", FILTER_SANITIZE_STRING);
+    $motdepasse = filter_input(INPUT_POST, "motdepasse", FILTER_SANITIZE_STRING);
 
-    if ($identifiant == "admin" && $motdepasse == "admin") {
-        $_SESSION["connecte"] = true;
-        $_SESSION["identifiant"] = "admin";
+    // Lire les utilisateurs stockés (fichier simulé ici)
+    $utilisateurs = file("utilisateurs.txt", FILE_IGNORE_NEW_LINES);
+
+    foreach ($utilisateurs as $ligne) {
+        list($nom, $prenom, $email, $date_naissance, $hash_stocke) = explode(";", $ligne);
+
+        // Vérifier si l'email (ou login) correspond et si le mot de passe est correct
+        if ($email === $identifiant && password_verify($motdepasse, $hash_stocke)) {
+            $_SESSION["connecte"] = true;
+            $_SESSION["identifiant"] = $email;
+            header("Location: dashboard.php");
+            exit();
+        }
     }
-}
 
+    // Si aucune correspondance trouvée
+    echo "Identifiants incorrects. Veuillez réessayer.";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,11 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <h1>Création de compte</h1>
-    <?php if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]): ?>
+    <?php if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]): ?> <!--Vérifie si l'utilisateur est connecté-->
         <h1>Bienvenue <?= $_SESSION["identifiant"] ?></h1>
     <?php else: ?>
 
-        <form action="creation-compte.php" method="post">
+        <form action="traitement-creation-compte.php" method="post">
             <label for="nom">Nom</label>
             <input type="text" name="nom" id="nom" required>
 
@@ -54,9 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php endif; ?>
 
     <?php
-require_once './footer.php';
-?>
+    require_once './footer.php';
+    ?>
 
 </body>
-</html>
 
+</html>

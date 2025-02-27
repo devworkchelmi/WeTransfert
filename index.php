@@ -11,7 +11,7 @@ $mail = filter_input(INPUT_COOKIE, "adressemail");
 
 setcookie($mail, $mdp); // maj de cookie pour un utilisateur
 
-    if ($_SERVER["REQUEST_METHOD"] == isset($_POST['adressemail'] && $_POST['mdpuser'])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['adressemail']) && isset($_POST['mdpuser'])) {
         $mail = filter_input(INPUT_POST, "adressemail", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $mdp = filter_input(INPUT_POST, "mdpuser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 

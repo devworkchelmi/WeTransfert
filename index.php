@@ -7,19 +7,26 @@ $mail = filter_input(INPUT_GET, "adressemail");
 $mdp = filter_input(INPUT_GET, "mdpuser");
 $identifiant = [$mail, $mdp] = index();
 
-$mail = filter_input(INPUT_COOKIE, "adressemail");  //le mail sert d'identifiant
+$mail = filter_input(INPUT_COOKIE, "adressemail");  
 
 setcookie($mail, $mdp); // maj de cookie pour un utilisateur
 
-    if (isset ($_POST['adressemail'] &&$_POST['mdpuser'])){
-        $mail = filter_input(INPUT_POST, "adressemail");
-        $mdp = filter_input(INPUT_POST, "mdpuser");
+    if ($_SERVER["REQUEST_METHOD"] == isset($_POST['adressemail'] && $_POST['mdpuser'])) {
+        $mail = filter_input(INPUT_POST, "adressemail", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $mdp = filter_input(INPUT_POST, "mdpuser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        $_SESSION['adressemail'] = $mail ;
-        $_SESSION['mdpuser'] = $mdp ;
+        $authentifie = false;
 
-        $_SESSION["connecte"] = true;
+        foreach ($identifiant as $id) {
+            if ($identifiant["mail"] === $id && $identifiant["mdp"] === $mdp) {
+                $authentifie = true;
+                $_SESSION["identifiant"] = $id; //le mail sert d'identifiant
+                $_SESSION["connecte"] = true;
+                header("Location: dashboard.php"); // Redirection après connexion
+                exit();
 
+            }
+        }
     }
 
     if (!isset($_SESSION["connecte"]) || $_SESSION["connecte"] !== true) {
@@ -30,7 +37,6 @@ setcookie($mail, $mdp); // maj de cookie pour un utilisateur
     if (!$authentifie) {
         $message = "Identifiants incorrects. Veuillez réessayer.";
     }
-
 ?>
 
 <body>

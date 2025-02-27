@@ -1,6 +1,9 @@
 <?php
 require_once './fonctions.php';
 [$fichiers] = listerFichiers();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    uploadFichier();
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,5 +22,4 @@ require_once './fonctions.php';
             <input type="button" value="Se deconnecter" id="deconnexion" onclick="deconnexion()">
         </ul>
     </header>
-
 <main>

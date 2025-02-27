@@ -1,33 +1,53 @@
 <?php
 require_once './fonctions.php';
 require_once './header.php';
-require_once './footer.php';
+session_start();
 
+$mail = filter_input(INPUT_GET, "adressemail");
+$mdp = filter_input(INPUT_GET, "mdpuser");
+$identifiant = [$mail, $mdp] = index();
 
-[$nom, $prenom, $mail, $mdp] = index();
+$mail = filter_input(INPUT_COOKIE, "adressemail");  
 
+setcookie($mail, $mdp); // maj de cookie pour un utilisateur
 
-$methode = $_SERVER["REQUEST_METHOD"];
-if($methode == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['adressemail']) && isset($_POST['mdpuser'])) {
+        $mail = filter_input(INPUT_POST, "adressemail", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $mdp = filter_input(INPUT_POST, "mdpuser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    $nom = filter_input(INPUT_POST, "nom");
-    $prenom = filter_input(INPUT_POST, "prenom");
-    $mail = filter_input(INPUT_POST, "mail");
-    $mdp = filter_input(INPUT_POST, "mdp");
+        $authentifie = false;
 
-    var_dump($nom, $prenom);
-}
+        foreach ($identifiant as $id) {
+            if ($identifiant["mail"] === $id && $identifiant["mdp"] === $mdp) {
+                $authentifie = true;
+                $_SESSION["identifiant"] = $id; //le mail sert d'identifiant
+                $_SESSION["connecte"] = true;
+                header("Location: dashboard.php"); // Redirection après connexion
+                exit();
+
+            }
+        }
+    }
+
+    if (!isset($_SESSION["connecte"]) || $_SESSION["connecte"] !== true) {
+        header("Location: dashboard.php");
+        exit();
+    }
+
+    if (!$authentifie) {
+        $message = "Identifiants incorrects. Veuillez réessayer.";
+    }
 ?>
 
+<body>
+    <h1>Bienvenue sur WeTransfert</h1>
 
     <section>
-        <form action="POST">
-                <label for="nom">Nom</label>
-                <input type="text" id="nom" name="lenom">
-                
-                <label for="prenom">Prenom</label>
-                <input type="text" id="prenom" name="leprenom">
-                
+        <h2>Connexion</h2>
+            <form action="POST">
+                <label for="mail">Adresse mail</label>
+                <input type="text" id="mail" name="adressemail">
+
                 <label for="mdp">Mot de passe</label>
                 <input type="text" id="mdp" name="motdepasse">
 
@@ -36,4 +56,8 @@ if($methode == "POST") {
     </section>
 
     
+</body>
 
+<?php   
+require_once './footer.php';
+?>

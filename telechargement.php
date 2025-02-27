@@ -6,15 +6,18 @@ $fichiers = scandir("./uploads");
 // récuperer les message d'erreur ou de confirmation et enregistrer les fichiers
 $errorMessage = "";
 $confirmationMessage = "";
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-    list($errorMessage, $confirmationMessage) = uploadFichier();
-     // Recharger la liste des fichiers après upload
-    $fichiers = scandir("./uploads");
-
-} elseif (isset($_POST['delete'])) { //supprimer des fichiers
-    $confirmationMessage = supprimerFichier($_POST['delete']);
-    // Recharger la liste des fichiers après suppression
-    $fichiers = scandir("./uploads");
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['submit'])) {
+        list($errorMessage, $confirmationMessage) = uploadFichier();
+        // Recharger la liste des fichiers après upload
+        $fichiers = scandir("./uploads");
+    } elseif (isset($_POST['delete'])) {
+        $confirmationMessage = supprimerFichier($_POST['delete']);
+        // Recharger la liste des fichiers après suppression
+        $fichiers = scandir("./uploads");
+    } elseif (isset($_POST['download'])) {
+        downloadFile($_POST['download']);
+    }
 }
 
 ?>
@@ -30,7 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 <li>
                     <?= $fichier ?>
                     <button onclick="deleteFile('<?= $fichier ?>')">Supprimer</button>
-                    <button onclick="downloadFile('<?= $fichier ?>')">Télécharger</button>
+                    <input type="hidden" name="download" value="<?= $fichier ?>">
+                    <button type="submit">Télécharger</button>
                 </li>
             <?php endif; ?>
         <?php endforeach; ?>
@@ -46,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <label for="file"> Enregistrer un nouveau fichier </label>
     <br>
     <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload File" name="submit">
+    <input type="submit" value="enregistrer" name="submit">
     <?php if (!empty($errorMessage)): ?>
         <p style="color: red;"><?= $errorMessage ?></p>
     <?php endif; ?>

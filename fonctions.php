@@ -54,11 +54,31 @@ function uploadFichier() {
     }
 }
 
+// fonction supprimer un fichier
 function supprimerFichier($fileName) {
     $filePath = './uploads/' . $fileName;
+    // On vérifie si le fichier existe avant de le supprimer
     if (file_exists($filePath)) {
+        //unlink() supprime un fichier
         unlink($filePath);
         return "Le fichier a été supprimé avec succès.";
+    } else {
+        return "Le fichier n'existe pas.";
+    }
+}
+
+function downloadFile($fileName) {
+    $filePath = './uploads/' . $fileName;
+    if (file_exists($filePath)) {
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="'.basename($filePath).'"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($filePath));
+        readfile($filePath);
+        exit;
     } else {
         return "Le fichier n'existe pas.";
     }

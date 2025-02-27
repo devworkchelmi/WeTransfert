@@ -3,14 +3,12 @@ require_once './fonctions.php';
 require_once './header.php';
 
 
-[$nom, $prenom, $mail, $mdp] = index();
+[$mail, $mdp] = index();
 
 
 $methode = $_SERVER["REQUEST_METHOD"];
 if($methode == "POST") {
 
-    $nom = filter_input(INPUT_POST, "nom");
-    $prenom = filter_input(INPUT_POST, "prenom");
     $mail = filter_input(INPUT_POST, "mail");
     $mdp = filter_input(INPUT_POST, "mdp");
 
@@ -31,12 +29,9 @@ if($methode == "POST") {
 
     <section>
         <form action="POST">
-                <label for="nom">Nom</label>
-                <input type="text" id="nom" name="lenom">
-                
-                <label for="prenom">Prenom</label>
-                <input type="text" id="prenom" name="leprenom">
-                
+            <label for="mail">Adresse mail</label>
+            <input type="text" id="mail" name="mail">
+                            
                 <label for="mdp">Mot de passe</label>
                 <input type="text" id="mdp" name="motdepasse">
 

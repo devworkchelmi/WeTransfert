@@ -1,70 +1,36 @@
 <?php
 require_once './header.php';
-session_start();
-
-// Liste des comptes autorisés (à terme, à stocker en BDD)
-$comptes = [
-    ["login" => "admin", "mdp" => "admin"],
-    ["login" => "modo", "mdp" => "modo"]
-];
-
-$message = ""; // Message d'erreur ou de succès
-
-// Vérification des identifiants après soumission du formulaire de connexion
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["identifiant"], $_POST["motdepasse"])) {
-    $identifiant = filter_input(INPUT_POST, "identifiant", FILTER_SANITIZE_STRING);
-    $motdepasse = filter_input(INPUT_POST, "motdepasse", FILTER_SANITIZE_STRING);
-
-    // Vérifier si le login et le mot de passe correspondent à un compte existant
-    $authentifie = false;
-    foreach ($comptes as $compte) {
-        if ($compte["login"] === $identifiant && $compte["mdp"] === $motdepasse) {
-            $authentifie = true;
-            $_SESSION["connecte"] = true;
-            $_SESSION["identifiant"] = $identifiant;
-            header("Location: dashboard.php"); // Redirection après connexion
-            exit();
-        }
-    }
-
-    // Si aucune correspondance n'est trouvée
-    if (!$authentifie) {
-        $message = "Identifiants incorrects. Veuillez réessayer.";
-    }
-}
 ?>
 
+<?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $identifiant = filter_input(INPUT_POST, "identifiant");
+    $motdepasse = filter_input(INPUT_POST, "motdepasse");
+
+    if ($identifiant == "admin" && $motdepasse == "admin") {
+        $_SESSION["connecte"] = true;
+        $_SESSION["identifiant"] = "admin";
+    }
+}
+
+?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion et Création de compte</title>
+    <title>Document</title>
 </head>
-<body>
-    <h1>Connexion</h1>
-    
-    <?php if ($message) : ?>
-        <p style="color: red;"><?php echo $message; ?></p>
-    <?php endif; ?>
-    
-    <form action="creation-compte.php" method="post">
-        <label for="identifiant">Nom d'utilisateur :</label>
-        <input type="text" id="identifiant" name="identifiant" required>
-        <br>
-        <label for="motdepasse">Mot de passe :</label>
-        <input type="password" id="motdepasse" name="motdepasse" required>
-        <br>
-        <button type="submit">Se connecter</button>
-    </form>
 
+<body>
     <h1>Création de compte</h1>
     <?php if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]): ?>
-        <h2>Bienvenue, <?= htmlspecialchars($_SESSION["identifiant"]); ?> !</h2>
-        <a href="logout.php">Se déconnecter</a>
+        <h1>Bienvenue <?= $_SESSION["identifiant"] ?></h1>
     <?php else: ?>
 
-        <form action="traitement-creation.php" method="post">
+        <form action="creation-compte.php" method="post">
             <label for="nom">Nom</label>
             <input type="text" name="nom" id="nom" required>
 
@@ -87,6 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["identifiant"], $_POST[
         </form>
     <?php endif; ?>
 
-    <?php require_once './footer.php'; ?>
+    <?php
+require_once './footer.php';
+?>
+
 </body>
 </html>
+

@@ -6,13 +6,12 @@ session_start();
 $mail = filter_input(INPUT_GET, "adressemail");
 $mdp = filter_input(INPUT_GET, "mdpuser");
 $identifiant = [$mail, $mdp] = index();
-
 $mail = filter_input(INPUT_COOKIE, "adressemail");  
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['adressemail']) && isset($_POST['mdpuser'])) {
         $mail = filter_input(INPUT_POST, "adressemail", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $mdp = filter_input(INPUT_POST, "mdpuser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
+        $utilisateurs = file("utilisateurs.txt", FILE_IGNORE_NEW_LINES);
         $authentifie = false;
 
         foreach ($identifiant as $id) {
@@ -22,7 +21,6 @@ $mail = filter_input(INPUT_COOKIE, "adressemail");
                 $_SESSION["connecte"] = true;
                 header("Location: dashboard.php"); // Redirection après connexion
                 exit();
-
             }
         }
     }

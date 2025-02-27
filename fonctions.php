@@ -5,7 +5,6 @@ function index(){
     $mdp = "mot de passe user";
 
     return [
- 
         $mail,
         $mdp
     ];

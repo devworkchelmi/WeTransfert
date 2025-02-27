@@ -1,7 +1,7 @@
 <?php
 require_once './fonctions.php';
 require_once './header.php';
-require_once './footer.php';
+
 
 
 [$nom, $prenom, $mail, $mdp] = index();
@@ -19,13 +19,7 @@ if($methode == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de connexion</title>
-</head>
+
 <body>
     <h1>Bienvenue sur WeTransfert</h1>
     <h2>Connexion</h2>
@@ -42,4 +36,5 @@ if($methode == "POST") {
 
     
 </body>
+<?php   require_once './footer.php';?>
 </html>

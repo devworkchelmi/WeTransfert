@@ -1,7 +1,6 @@
 <?php
 require_once './fonctions.php';
 require_once './header.php';
-session_start();
 
 $errorMessage="";
 deconnexion();

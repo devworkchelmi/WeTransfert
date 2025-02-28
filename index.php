@@ -39,10 +39,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
         <h2>Connexion</h2>
             <form action="POST">
                 <label for="mail">Adresse mail</label>
-                <input type="text" id="mail" name="adressemail">
+                <input type="email" id="mail" name="adressemail">
 
                 <label for="mdp">Mot de passe</label>
-                <input type="text" id="mdp" name="motdepasse">
+                <input type="password" id="mdp" name="motdepasse">
 
                 <input type="submit" value="Envoyer" name="submit">
             </form>

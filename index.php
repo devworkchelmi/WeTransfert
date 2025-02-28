@@ -5,27 +5,6 @@ session_start();
 
 $identifiant = [$mail, $mdp] = index();
 
-/*
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['adressemail']) && isset($_POST['mdpuser'])) {
-        $mail = filter_input(INPUT_POST, "adressemail", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $mdp = filter_input(INPUT_POST, "mdpuser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $utilisateurs = file("utilisateurs.txt", FILE_IGNORE_NEW_LINES);
-        $authentifie = false;
-
-        foreach ($identifiant as $id) {
-            if ($identifiant["mail"] === $id && $identifiant["mdp"] === $mdp) {
-                $authentifie = true;
-                $_SESSION["identifiant"] = $id; //le mail sert d'identifiant
-                $_SESSION["connecte"] = true;
-                header("Location: dashboard.php"); // Redirection après connexion
-                exit();
-            }
-        }
-            
-    }
-        */
-
         // Vérification des identifiants après soumission du formulaire de connexion
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST["motdepasse"])) {
     $identifiant = filter_input(INPUT_POST, "identifiant", FILTER_SANITIZE_STRING);
@@ -43,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
             $_SESSION["identifiant"] = $email;
             $_SESSION["nom"] = $nom;
             $_SESSION["prenom"] = $prenom;
-            header("Location: /telechargement.php");
+            header("Location: telechargement.php");
             exit();
         }
     }

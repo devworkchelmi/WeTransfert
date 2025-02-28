@@ -86,7 +86,6 @@ function downloadFile($fileName) {
     }
 }
 
-<?php
 function index(){
     $nom = "nom de l'utilisateur";
     $prenom = "prenom de l'utilisateur";

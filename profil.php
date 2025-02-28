@@ -4,7 +4,6 @@ require_once './header.php';
 ?>
 
 <?php
-session_start();
 
 // Vérification si l'utilisateur est connecté
 if (!isset($_SESSION["connecte"]) || $_SESSION["connecte"] !== true) {

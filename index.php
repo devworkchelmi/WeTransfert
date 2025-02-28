@@ -1,9 +1,10 @@
 <?php
 require_once './fonctions.php';
 require_once './header.php';
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 $errorMessage="";
-deconnexion();
 // Vérification des identifiants après soumission du formulaire de connexion
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST["motdepasse"])) {
     $identifiant = filter_input(INPUT_POST, "identifiant", FILTER_SANITIZE_FULL_SPECIAL_CHARS);

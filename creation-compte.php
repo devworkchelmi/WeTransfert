@@ -1,10 +1,5 @@
 <?php
 require_once './header.php';
-?>
-
-<?php
-session_start();
-
 // Vérification des identifiants après soumission du formulaire de connexion
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST["motdepasse"])) {
     $identifiant = filter_input(INPUT_POST, "identifiant", FILTER_SANITIZE_STRING);

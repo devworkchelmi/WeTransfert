@@ -1,11 +1,12 @@
 
 <?php
+
 function deconnexion() {
-    if (isset($_POST['deconnexion'])) {
-        session_destroy();
-        header("Location: index.php");
-        exit();
-    }
+    // Logique de déconnexion
+    session_unset();
+    session_destroy();
+    header("Location: index.php");
+    exit();
 }
 
 // fonction télécharger un ficher
@@ -98,6 +99,4 @@ function index(){
         $mdp
     ];
 }
-
-
 ?>

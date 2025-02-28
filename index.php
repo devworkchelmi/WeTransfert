@@ -7,6 +7,7 @@ $mail = filter_input(INPUT_GET, "adressemail");
 $mdp = filter_input(INPUT_GET, "mdpuser");
 $identifiant = [$mail, $mdp] = index();
 $mail = filter_input(INPUT_COOKIE, "adressemail");  
+/*
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['adressemail']) && isset($_POST['mdpuser'])) {
         $mail = filter_input(INPUT_POST, "adressemail", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -23,16 +24,35 @@ $mail = filter_input(INPUT_COOKIE, "adressemail");
                 exit();
             }
         }
+            
+    }
+        */
+
+        // Vérification des identifiants après soumission du formulaire de connexion
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST["motdepasse"])) {
+    $identifiant = filter_input(INPUT_POST, "identifiant", FILTER_SANITIZE_STRING);
+    $motdepasse = filter_input(INPUT_POST, "motdepasse", FILTER_SANITIZE_STRING);
+
+    // Lire les utilisateurs stockés (fichier texte)
+    $utilisateurs = file("utilisateurs.txt", FILE_IGNORE_NEW_LINES);
+
+    foreach ($utilisateurs as $ligne) {
+        list($nom, $prenom, $email, $date_naissance, $hash_stocke) = explode(";", $ligne);
+
+        // Vérifier si l'email correspond et si le mot de passe est correct
+        if ($email === $identifiant && password_verify($motdepasse, $hash_stocke)) {
+            $_SESSION["connecte"] = true;
+            $_SESSION["identifiant"] = $email;
+            $_SESSION["nom"] = $nom;
+            $_SESSION["prenom"] = $prenom;
+            header("Location: dashboard.php");
+            exit();
+        }
     }
 
-    if (!isset($_SESSION["connecte"]) || $_SESSION["connecte"] !== true) {
-        header("Location: dashboard.php");
-        exit();
-    }
-
-    if (!$authentifie) {
-        $message = "Identifiants incorrects. Veuillez réessayer.";
-    }
+    // Si aucune correspondance trouvée
+    echo "Identifiants incorrects. <a href='creation-compte.php'>Retour</a>";
+}
 ?>
 
 <body>

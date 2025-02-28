@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fichiers = scandir("./uploads");
     } elseif (isset($_POST['download'])) {
         downloadFile($_POST['download']);
+        exit;
     }
 }
 
@@ -33,8 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li>
                     <?= $fichier ?>
                     <button onclick="deleteFile('<?= $fichier ?>')">Supprimer</button>
-                    <input type="hidden" name="download" value="<?= $fichier ?>">
-                    <button type="submit">Télécharger</button>
+                    <form action="telechargement.php" method="POST" style="display:inline;">
+                        <input type="hidden" name="download" value="<?= $fichier ?>">
+                        <button type="submit">Télécharger</button>
+                    </form>
                 </li>
             <?php endif; ?>
         <?php endforeach; ?>
@@ -59,9 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 </form>
 
-
 <?php
 require_once './footer.php';
 ?>
-
-

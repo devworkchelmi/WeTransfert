@@ -1,5 +1,15 @@
 
 <?php
+function deconnexion() {
+    if (isset($_POST['deconnexion'])) {
+        session_destroy();
+        header("Location: index.php");
+        exit();
+    }
+}
+
+
+
 // Fonction de connexion
 function deconnexion() {
     // Suppression des cookies
@@ -99,5 +109,6 @@ function index(){
         $mdp
     ];
 }
+
 
 ?>

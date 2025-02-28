@@ -18,7 +18,8 @@ session_start();
             <li id="profil" class="my-nav"><a href="profil.php">Profil</a></li>
             <li id="creer_compte" class="my-nav"><a href="creation-compte.php">Créer</a></li>
             <li id="telechargement" class="my-nav"><a href="telechargement.php">Téléchargement</a></li>
-            <input type="button" value="Se deconnecter" id="deconnexion" onclick="deconnexion()">
+            <li id="deconnexion" class="my-nav"><a href="#" onclick="deconnexion()">Se déconnecter</a></li>
+
         </ul>
     </header>
 <main>

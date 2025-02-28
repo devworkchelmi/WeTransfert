@@ -8,17 +8,6 @@ function deconnexion() {
     }
 }
 
-
-
-// Fonction de connexion
-function deconnexion() {
-    // Suppression des cookies
-    setcookie('mail', '', time() - 3600);
-    setcookie('mot_de_passe', '', time() - 3600);
-    // Redirection vers la page d'accueil
-    header('Location: index.php');
-}
-
 // fonction télécharger un ficher
 function uploadFichier() {
     $errorMessage = "";

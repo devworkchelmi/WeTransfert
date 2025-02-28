@@ -3,10 +3,8 @@ require_once './fonctions.php';
 require_once './header.php';
 session_start();
 
-$mail = filter_input(INPUT_GET, "adressemail");
-$mdp = filter_input(INPUT_GET, "mdpuser");
 $identifiant = [$mail, $mdp] = index();
-$mail = filter_input(INPUT_COOKIE, "adressemail");  
+
 /*
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['adressemail']) && isset($_POST['mdpuser'])) {
@@ -45,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
             $_SESSION["identifiant"] = $email;
             $_SESSION["nom"] = $nom;
             $_SESSION["prenom"] = $prenom;
-            header("Location: dashboard.php");
+            header("Location: /telechargement.php");
             exit();
         }
     }

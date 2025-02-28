@@ -1,0 +1,63 @@
+/* ---- Général ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* ---- Header ---- */
+header {
+    background-color: #333; /* Couleur de fond sombre */
+    padding: 15px 0; /* Espacement vertical */
+    width: 100%;
+    position: fixed; /* Garde le header en haut */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Empêche le header de cacher le contenu */
+main {
+    padding-top: 80px; /* Ajuste la hauteur selon ton header */
+}
+
+
+/* ---- Navigation ---- */
+.my-navigation {
+    display: flex;
+    justify-content: center; /* Centrage des liens */
+    list-style: none;
+    padding: 0;
+}
+
+.my-nav {
+    margin: 0 15px; /* Espacement entre les liens */
+}
+
+.my-nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px;
+    transition: background 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+}
+
+/* ---- Effet au survol ---- */
+.my-nav a:hover {
+    background-color: #f4a261; /* Couleur d'accentuation */
+    color: #333;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .my-navigation {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .my-nav {
+        margin-bottom: 10px;
+    }
+}

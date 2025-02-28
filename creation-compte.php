@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
         if ($email === $identifiant && password_verify($motdepasse, $hash_stocke)) {
             $_SESSION["connecte"] = true;
             $_SESSION["identifiant"] = $email;
-            header("Location: dashboard.php");
+            header("Location: profil.php");
             exit();
         }
     }
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Créer</title>
 </head>
 
 <body>

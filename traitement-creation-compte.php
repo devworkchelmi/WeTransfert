@@ -1,8 +1,8 @@
 <!-- Ce fichier va : 
-✅ Vérifier si tous les champs sont remplis.
-✅ Vérifier si les mots de passe correspondent.
-✅ Hacher le mot de passe avant de l’enregistrer.
-✅ Stocker les informations dans utilisateurs.txt. -->
+ Vérifier si tous les champs sont remplis.
+ Vérifier si les mots de passe correspondent.
+ Hacher le mot de passe avant de l’enregistrer.
+ Stocker les informations dans utilisateurs.txt. -->
 
 
 <?php

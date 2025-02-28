@@ -25,11 +25,10 @@ if($methode == "POST") {
 </head>
 <body>
     <h1>Bienvenue sur WeTransfert</h1>
-    <!-- <h2>Connexion</h2> -->
-
+    <h2>Connectez-vous pour envoyer vos fichiers</h2>
     <section>
-        <form action="POST">
-            <label for="mail">Adresse mail</label>
+    <form action="index.php" method="post">
+    <label for="mail">Adresse mail</label>
             <input type="text" id="mail" name="mail">
                             
                 <label for="mdp">Mot de passe</label>
@@ -37,6 +36,8 @@ if($methode == "POST") {
 
                 <input type="submit" value="Envoyer" name="submit">
             </form>
+            <p>Pas encore de compte ? <a href="creation-compte.php">Créez-en un</a></p>
+
     </section>
 
 <?php

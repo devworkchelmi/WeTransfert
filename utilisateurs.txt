@@ -1,8 +1,3 @@
 chelmi;angélique;shelmyangelique@gmail.com;2025-02-02;$2y$10$TmVkhwykEfmDPDD.g1kh1O3VRegEqwJ5WRIKCTM8glR5Ef5SDdpfm
 chelmi;ang&eacute;lique;azerty@exemple.net;2025-02-08;$2y$10$LRXCcobV/hk1yvwdD4MBxueh2cpEv/D/0amVKvZ0v1bd3hmWP/rWa
-chelmi;ang&eacute;lique;azerty@exemple.net;2025-02-23;$2y$10$GCCOmYwPdZT/Es29YdHi6uDcmgDci0.JVQ6f1FW2ppB9cv4ep2UGu
-chelmi;ang&eacute;lique;azerty@exemple.net;2025-02-22;$2y$10$Gwoc3dZR8.GD873GDEuLEuB5aOk3xfILz6hQJ3c4P3BSv9HG9xEaq
-jean;doe;azerty@exemple.com;2025-02-16;$2y$10$g51aTIKrHDx9KUhwGBhb.O/RNGNu0hYzBpfUpd4Cf5cb7Kyx98VTW
-chelmi;ang&eacute;lique;azerty@exemple.net;2025-02-16;$2y$10$hApuUxx2ZWX262jbWRSG4OOfjO2xSgah2Pftgr/bFUVrqaPw3tOki
-chelmi;ang&eacute;lique;azerty@exemple.net;2025-02-01;$2y$10$Cafsq8ixEFTLbGgYuiTtS.PCY9hY/C.NmXXCiSWpQkm/X8Iey
-a;a;test@test.com;2025-02-28;$2y$10$i9dyriw5KQykuiNJHRLce.H.m.6WgR/DsI2yE9EbkUdN6tAERyrFK
+

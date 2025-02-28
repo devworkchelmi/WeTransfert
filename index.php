@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
     // Lire les utilisateurs stockés (fichier texte)
     $utilisateurs = file("utilisateurs.txt", FILE_IGNORE_NEW_LINES);
     foreach ($utilisateurs as $ligne) {
-        var_dump(list($nom, $prenom, $email, $date_naissance, $hash_stocke) = explode(";", $ligne)) ;
+        (list($nom, $prenom, $email, $date_naissance, $hash_stocke) = explode(";", $ligne)) ;
 
         // Vérifier si l'email correspond et si le mot de passe est correct
         if ($email === $identifiant && $motdepasse) {

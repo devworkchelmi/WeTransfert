@@ -21,7 +21,7 @@ if (!isset($_SESSION["connecte"]) || $_SESSION["connecte"] !== true) {
     <title>Tableau de bord</title>
 </head>
 <body>
-    <h1>Bienvenue, <?= htmlspecialchars($_SESSION["identifiant"]); ?> !</h1>
+    <h1>Bienvenue <?= htmlspecialchars($_SESSION["identifiant"]); ?> !</h1>
     <p>Vous êtes connecté.</p>
     <a href="logout.php">Se déconnecter</a>
 

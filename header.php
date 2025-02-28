@@ -1,5 +1,5 @@
-<?php
-require_once './fonctions.php';
+<?php require_once './fonctions.php';
+  
 ?>
 
 <!DOCTYPE html>
@@ -9,8 +9,7 @@ require_once './fonctions.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="création-compte.css"><!--css formulaire création de compte-->
     <link rel="stylesheet" href="header.css"><!--css du header-->
-
-    <title>Site boutique</title>
+    <title>WeTransfert</title>
 </head>
 <body>
     <header>
@@ -19,7 +18,7 @@ require_once './fonctions.php';
             <li id="profil" class="my-nav"><a href="profil.php">Profil</a></li>
             <li id="creer_compte" class="my-nav"><a href="creation-compte.php">Créer</a></li>
             <li id="telechargement" class="my-nav"><a href="telechargement.php">Téléchargement</a></li>
+            <input type="button" value="Se deconnecter" id="deconnexion" onclick="deconnexion()">
         </ul>
     </header>
-
-    <main>
+<main>

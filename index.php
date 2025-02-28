@@ -4,7 +4,7 @@ require_once './header.php';
 session_start();
 
 $errorMessage="";
-
+deconnexion();
 // Vérification des identifiants après soumission du formulaire de connexion
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST["motdepasse"])) {
     $identifiant = filter_input(INPUT_POST, "identifiant", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
     // Lire les utilisateurs stockés (fichier texte)
     $utilisateurs = file("utilisateurs.txt", FILE_IGNORE_NEW_LINES);
     foreach ($utilisateurs as $ligne) {
-        var_dump(list($nom, $prenom, $email, $date_naissance, $hash_stocke) = explode(";", $ligne)) ;
+    list($nom, $prenom, $email, $date_naissance, $hash_stocke) = explode(";", $ligne) ;
 
         // Vérifier si l'email correspond et si le mot de passe est correct
         if ($email === $identifiant && $motdepasse) {
@@ -48,9 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
             <?php if (!empty($errorMessage)): ?>
               <p style="color: red;"><?= $errorMessage ?></p>
             <?php endif; ?>
-            <form action="index.php" method="POST">
-                <button type="submit" name="deconnexion">Déconnexion</button>
-            </form>
             <?php if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]): ?>
               <p style="color: green;">Vous êtes connecté.</p>
               <?php else: ?>

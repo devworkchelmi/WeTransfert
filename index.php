@@ -28,7 +28,7 @@ if($methode == "POST") {
     <!-- <h2>Connexion</h2> -->
 
     <section>
-        <form action="POST">
+        <form action="telechargement.php" method="post">>
             <label for="mail">Adresse mail</label>
             <input type="text" id="mail" name="mail">
                             

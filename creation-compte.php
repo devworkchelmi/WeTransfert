@@ -23,49 +23,55 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
     // Si aucune correspondance trouvée
     echo "Identifiants incorrects. Veuillez réessayer.";
 }
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer</title>
+    <title>Créer un compte</title>
+    <link rel="stylesheet" href="création-compte.css">
 </head>
 
 <body>
-    <h1>Création de compte</h1>
-    <?php if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]): ?> <!--Vérifie si l'utilisateur est connecté-->
-        <h1>Bienvenue <?= $_SESSION["identifiant"] ?></h1>
-    <?php else: ?>
+    <!-- Image de fond en arrière-plan -->
+    <div class="background-image"></div>
 
-        <form action="traitement-creation-compte.php" method="post">
-            <label for="nom">Nom</label>
-            <input type="text" name="nom" id="nom" required>
+    <!-- Conteneur du formulaire avec z-index -->
+    <div class="container">
+        <h1>Création de compte</h1>
+        
+        <?php if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]): ?> 
+            <h1>Bienvenue <?= htmlspecialchars($_SESSION["identifiant"]) ?></h1>
+        <?php else: ?>
 
-            <label for="prenom">Prénom</label>
-            <input type="text" name="prenom" id="prenom" required>
+            <form action="traitement-creation-compte.php" method="post">
+                <label for="nom">Nom</label>
+                <input type="text" name="nom" id="nom" required>
 
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
+                <label for="prenom">Prénom</label>
+                <input type="text" name="prenom" id="prenom" required>
 
-            <label for="date_naissance">Date de naissance</label>
-            <input type="date" name="date_naissance" id="date_naissance" required>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
 
-            <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password" required>
+                <label for="date_naissance">Date de naissance</label>
+                <input type="date" name="date_naissance" id="date_naissance" required>
 
-            <label for="password2">Confirmer le mot de passe</label>
-            <input type="password" name="password2" id="password2" required>
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password" id="password" required>
 
-            <input type="submit" value="Créer">
-        </form>
-    <?php endif; ?>
+                <label for="password2">Confirmer le mot de passe</label>
+                <input type="password" name="password2" id="password2" required>
 
-    <?php
-    require_once './footer.php';
-    ?>
+                <input type="submit" value="Créer">
+            </form>
+        <?php endif; ?>
+    </div>
 
+    <?php require_once './footer.php'; ?>
 </body>
 
 </html>

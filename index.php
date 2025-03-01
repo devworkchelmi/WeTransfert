@@ -4,7 +4,6 @@ require_once './header.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-deconnexion();
 $errorMessage = "";
 // Vérification des identifiants après soumission du formulaire de connexion
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST["motdepasse"])) {
@@ -26,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
             exit();
         }
     }
-
+                                 
     // Si aucune correspondance trouvée
     $errorMessage = "Identifiants incorrects.";
 }

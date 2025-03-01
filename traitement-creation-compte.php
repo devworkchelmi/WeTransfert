@@ -31,23 +31,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Hachage du mot de passe avant stockage
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
+    $utilisateurs = [];
+
     // Vérifier si l'email existe déjà
-$utilisateurs = [];
-
-if (file_exists("utilisateurs.txt")) {
-    $utilisateurs = file("utilisateurs.txt", FILE_IGNORE_NEW_LINES);
-}
-    foreach ($utilisateurs as $ligne) {
-        list($nom_exist, $prenom_exist, $email_exist, $date_naissance_exist, $hash_exist) = explode(";", $ligne);
-        if ($email_exist === $email) {
-            die("Cet email est déjà enregistré.");
-        }
+    if (file_exists("utilisateurs.txt")) {
+        $utilisateurs = file("utilisateurs.txt", FILE_IGNORE_NEW_LINES);
     }
+        foreach ($utilisateurs as $ligne) {
+            list($nom_exist, $prenom_exist, $email_exist, $date_naissance_exist, $hash_exist) = explode(";", $ligne);
+            if ($email_exist === $email) {
+                die("Cet email est déjà enregistré.");
+            }
+        }
 
-    // Stockage des données dans un fichier texte
-    $user_data = "$nom;$prenom;$email;$date_naissance;$hash\n";
-    file_put_contents("utilisateurs.txt", $user_data, FILE_APPEND);
+        // Stockage des données dans un fichier texte
+        $user_data = "$nom;$prenom;$email;$date_naissance;$hash\n";
+        file_put_contents("utilisateurs.txt", $user_data, FILE_APPEND);
 
-    echo "Compte créé avec succès ! <a href='creation-compte.php'>Retour</a>";
+        echo "Compte créé avec succès ! <a href='creation-compte.php'>Retour</a>";
 }
 ?>

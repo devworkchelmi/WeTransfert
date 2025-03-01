@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
 
     <!-- Conteneur du formulaire avec z-index -->
     <div class="container">
-        <h1>Création de compte</h1>
+        <h1>Créer un compte</h1>
         
         <?php if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]): ?> 
             <h1>Bienvenue <?= htmlspecialchars($_SESSION["identifiant"]) ?></h1>

@@ -1,4 +1,5 @@
-<?php require_once './fonctions.php';
+<?php 
+require_once './fonctions.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -21,7 +22,7 @@ if (session_status() == PHP_SESSION_NONE) {
             <li id="profil" class="my-nav"><a href="profil.php">Profil</a></li>
             <li id="creer_compte" class="my-nav"><a href="creation-compte.php">Créer</a></li>
             <li id="telechargement" class="my-nav"><a href="telechargement.php">Téléchargement</a></li>
-            <li id="deconnexion" class="my-nav"><a href="#" onclick="deconnexion()">Se déconnecter</a></li>
+            <li id="deconnexion" class="my-nav"><a href="logout.php">Se déconnecter</a></li>
 
         </ul>
     </header>

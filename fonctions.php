@@ -1,14 +1,6 @@
 
 <?php
 
-function deconnexion() {
-    // Logique de déconnexion
-    session_unset();
-    session_destroy();
- 
-    exit();
-}
-
 // fonction télécharger un ficher
 function uploadFichier() {
     $errorMessage = "";

@@ -2,8 +2,8 @@
 require_once './header.php';
 // Vérification des identifiants après soumission du formulaire de connexion
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST["motdepasse"])) {
-    $identifiant = filter_input(INPUT_POST, "identifiant", FILTER_SANITIZE_STRING);
-    $motdepasse = filter_input(INPUT_POST, "motdepasse", FILTER_SANITIZE_STRING);
+    $identifiant = filter_input(INPUT_POST, "identifiant", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $motdepasse = filter_input(INPUT_POST, "motdepasse", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     // Lire les utilisateurs stockés (fichier simulé ici)
     $utilisateurs = file("utilisateurs.txt", FILE_IGNORE_NEW_LINES);

@@ -5,7 +5,7 @@ function deconnexion() {
     // Logique de déconnexion
     session_unset();
     session_destroy();
-    header("Location: index.php");
+ 
     exit();
 }
 

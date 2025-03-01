@@ -1,6 +1,7 @@
 chelmi;angélique;shelmyangelique@gmail.com;2025-02-02;$2y$10$TmVkhwykEfmDPDD.g1kh1O3VRegEqwJ5WRIKCTM8glR5Ef5SDdpfm
 chelmi;ang&eacute;lique;azerty@exemple.net;2025-02-08;$2y$10$LRXCcobV/hk1yvwdD4MBxueh2cpEv/D/0amVKvZ0v1bd3hmWP/rWa
 <<<<<<< HEAD
+<<<<<<< HEAD
 test;testp;test@test.test;2025-02-07;$2y$10$RzKsZwIeFOugvcOqxV.QieqCREmoE0rBWYsUQTJbCsQC6klm5O97.
 =======
 chelmi;ang&eacute;lique;azerty@exemple.net;2025-02-23;$2y$10$GCCOmYwPdZT/Es29YdHi6uDcmgDci0.JVQ6f1FW2ppB9cv4ep2UGu
@@ -10,3 +11,6 @@ chelmi;ang&eacute;lique;azerty@exemple.net;2025-02-16;$2y$10$hApuUxx2ZWX262jbWRS
 chelmi;ang&eacute;lique;azerty@exemple.net;2025-02-01;$2y$10$Cafsq8ixEFTLbGgYuiTtS.PCY9hY/C.NmXXCiSWpQkm/X8Iey
 a;a;test@test.com;2025-02-28;$2y$10$i9dyriw5KQykuiNJHRLce.H.m.6WgR/DsI2yE9EbkUdN6tAERyrFK
 >>>>>>> e7123b512d7cefe9bb2ca46aba0be43dc3b6a5f6
+=======
+john;doe;test@test.com;test
+>>>>>>> ead7eeb22d0cf5bda09f37df11f541f99c13c7ec

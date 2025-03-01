@@ -1,4 +1,8 @@
 chelmi;angélique;shelmyangelique@gmail.com;2025-02-02;$2y$10$TmVkhwykEfmDPDD.g1kh1O3VRegEqwJ5WRIKCTM8glR5Ef5SDdpfm
 chelmi;ang&eacute;lique;azerty@exemple.net;2025-02-08;$2y$10$LRXCcobV/hk1yvwdD4MBxueh2cpEv/D/0amVKvZ0v1bd3hmWP/rWa
+<<<<<<< HEAD
 
 TestNom;TestPrenom;test@test.com;2025-02-06;$2y$10$mF.ZnFb1Z4xLIk5Q68IJq.c1.gIJjDaPsTRNcxYMth5tdeHpj9CmK
+=======
+john;doe;test@test.com;test
+>>>>>>> 5f4fcc788524d72eefc90f706ce486aaa88992ea

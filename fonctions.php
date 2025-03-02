@@ -9,9 +9,8 @@ function uploadFichier($userEmail) {
         $target_dir = "uploads/";
         $upload_ok = 1;
         $file_type = strtolower(pathinfo($_FILES["fileToUpload"]["name"],PATHINFO_EXTENSION));
-        $pathInfo = pathinfo($_FILES["fileToUpload"]["name"]);
-        //$target_file = $target_dir . uniqid() . '.' . $file_type; Pour avoir un nom de fichier différents
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $target_file = $target_dir . uniqid() . '.' . $file_type; //Pour avoir un nom de fichier différents
+        $initial_name = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         if ( $target_file == "uploads/") {
             return $upload_ok = 0;
         } else{
@@ -43,9 +42,20 @@ function uploadFichier($userEmail) {
 
                     // Ajout du chemin du fichier à utilisateur.txt
                     $filePath = 'utilisateurs.txt';
-                    $fileContent = file_get_contents($filePath);
-                    $fileContent = str_replace($userEmail, $userEmail . ' ' . $target_file, $fileContent);
-                    file_put_contents($filePath, $fileContent);
+                    if (file_exists($filePath)) {
+                        $fileContent = file_get_contents($filePath);
+                        $lines = explode("\n", $fileContent);
+                        foreach ($lines as &$line) {
+                            if (strpos($line, $userEmail) !== false) {
+                                $line = rtrim($line) . ';' .  $initial_name;
+                                break;
+                            }
+                        }
+                        $newContent = implode("\n", $lines);
+                        file_put_contents($filePath, $newContent);
+                    } else {
+                        $errorMessage = "Le fichier utilisateur.txt n'existe pas.";
+                    }
                 } else {
                     $errorMessage = "Il y a eu une erreur pendant l'enregistrement du fichier.";
                 }
@@ -55,7 +65,7 @@ function uploadFichier($userEmail) {
         print_r($pathInfo);
         echo '</pre>';
         */
-        return array($errorMessage, $confirmationMessage);
+        return array($errorMessage, $confirmationMessage, $initial_name);
     }
 }
 

@@ -1,15 +1,14 @@
 <?php
-require_once './header.php';
-require_once './fonctions.php';
-
-//verifications de la connexion
+session_start();
 if (!isset($_SESSION['connecte']) || $_SESSION['connecte'] !== true) {
     // Redirigez l'utilisateur vers la page de connexion
     header('Location: index.php');
     exit();
 }
+require_once './header.php';
+require_once './fonctions.php';
 
-$userEmail = $_SESSION['identifiant'];
+$userEmail = $_SESSION['identifiant']; // Récupérer l'email de l'utilisateur connecté
 
 //récupérer les fichiers dans un tableau:
 $fichiers = scandir("./uploads");
@@ -31,8 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$userFiles = getUserFiles($userEmail);
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -48,10 +45,10 @@ $userFiles = getUserFiles($userEmail);
 
 <ul id="fileList">
 <?php if(!empty($fichiers)): ?>
-        <?php foreach($userFiles as $file): ?>
-            <?php if ($file !== '.' && $file !== '..'): ?>
+        <?php foreach($fichiers as $fichier): ?>
+            <?php if ($fichier !== '.' && $fichier !== '..'): ?>
                 <li>
-                <a href="<?= $file; ?>" download><?= basename($file); ?></a>
+                    <?= $fichier ?>
                     <button onclick="deleteFile('<?= $fichier ?>')">Supprimer</button>
                     <form action="telechargement.php" method="POST" style="display:inline;">
                         <input type="hidden" name="download" value="<?= $fichier ?>">
@@ -67,6 +64,8 @@ $userFiles = getUserFiles($userEmail);
 </ul>
 
 <form id="uploadForm" action="telechargement.php" method="POST" enctype="multipart/form-data">
+    <br>
+    <br>
     <label for="file"> Enregistrer un nouveau fichier </label>
     <br>
     <input type="file" name="fileToUpload" id="fileToUpload">

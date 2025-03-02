@@ -37,12 +37,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (file_exists("utilisateurs.txt")) {
         $utilisateurs = file("utilisateurs.txt", FILE_IGNORE_NEW_LINES);
     }
-        foreach ($utilisateurs as $ligne) {
-            list($nom_exist, $prenom_exist, $email_exist, $date_naissance_exist, $hash_exist) = explode(";", $ligne);
+    foreach ($utilisateurs as $ligne) {
+        $parts = explode(";", $ligne);
+        if (count($parts) === 5) {
+            list($nom_exist, $prenom_exist, $email_exist, $date_naissance_exist, $hash_exist) = $parts;
             if ($email_exist === $email) {
                 die("Cet email est déjà enregistré.");
             }
         }
+    }
 
         // Stockage des données dans un fichier texte
         $user_data = "$nom;$prenom;$email;$date_naissance;$hash\n";

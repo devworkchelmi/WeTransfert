@@ -1,12 +1,16 @@
 <?php
-session_start();
+require_once './header.php';
+require_once './fonctions.php';
+
+//verifications de la connexion
 if (!isset($_SESSION['connecte']) || $_SESSION['connecte'] !== true) {
     // Redirigez l'utilisateur vers la page de connexion
     header('Location: index.php');
     exit();
 }
-require_once './header.php';
-require_once './fonctions.php';
+
+$userEmail = $_SESSION['identifiant'];
+
 //récupérer les fichiers dans un tableau:
 $fichiers = scandir("./uploads");
 // récuperer les message d'erreur ou de confirmation et enregistrer les fichiers
@@ -14,7 +18,7 @@ $errorMessage = "";
 $confirmationMessage = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['submit'])) {
-        list($errorMessage, $confirmationMessage) = uploadFichier();
+        list($errorMessage, $confirmationMessage) = uploadFichier($userEmail);
         // Recharger la liste des fichiers après upload
         $fichiers = scandir("./uploads");
     } elseif (isset($_POST['delete'])) {
@@ -26,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
+
+$userFiles = getUserFiles($userEmail);
 
 ?>
 <!DOCTYPE html>
@@ -42,10 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <ul id="fileList">
 <?php if(!empty($fichiers)): ?>
-        <?php foreach($fichiers as $fichier): ?>
-            <?php if ($fichier !== '.' && $fichier !== '..'): ?>
+        <?php foreach($userFiles as $file): ?>
+            <?php if ($file !== '.' && $file !== '..'): ?>
                 <li>
-                    <?= $fichier ?>
+                <a href="<?= $file; ?>" download><?= basename($file); ?></a>
                     <button onclick="deleteFile('<?= $fichier ?>')">Supprimer</button>
                     <form action="telechargement.php" method="POST" style="display:inline;">
                         <input type="hidden" name="download" value="<?= $fichier ?>">
@@ -61,8 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </ul>
 
 <form id="uploadForm" action="telechargement.php" method="POST" enctype="multipart/form-data">
-    <br>
-    <br>
     <label for="file"> Enregistrer un nouveau fichier </label>
     <br>
     <input type="file" name="fileToUpload" id="fileToUpload">

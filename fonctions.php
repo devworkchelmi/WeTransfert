@@ -2,13 +2,14 @@
 <?php
 
 // fonction télécharger un ficher
-function uploadFichier() {
+function uploadFichier($userEmail) {
     $errorMessage = "";
     $confirmationMessage="";
     if (isset($_POST['submit'])) {
         $target_dir = "uploads/";
         $upload_ok = 1;
         $file_type = strtolower(pathinfo($_FILES["fileToUpload"]["name"],PATHINFO_EXTENSION));
+        $pathInfo = pathinfo($_FILES["fileToUpload"]["name"]);
         //$target_file = $target_dir . uniqid() . '.' . $file_type; Pour avoir un nom de fichier différents
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         if ( $target_file == "uploads/") {
@@ -39,11 +40,21 @@ function uploadFichier() {
             } else {
                 if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)) {
                     $confirmationMessage = "Le fichier : " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " a bien été enregistré.";
+
+                    // Ajout du chemin du fichier à utilisateur.txt
+                    $filePath = 'utilisateurs.txt';
+                    $fileContent = file_get_contents($filePath);
+                    $fileContent = str_replace($userEmail, $userEmail . ' ' . $target_file, $fileContent);
+                    file_put_contents($filePath, $fileContent);
                 } else {
                     $errorMessage = "Il y a eu une erreur pendant l'enregistrement du fichier.";
                 }
             }
         }
+        /*echo '<pre>';
+        print_r($pathInfo);
+        echo '</pre>';
+        */
         return array($errorMessage, $confirmationMessage);
     }
 }
@@ -76,6 +87,25 @@ function downloadFile($fileName) {
     } else {
         return "Le fichier n'existe pas.";
     }
+}
+
+// fonction pour récupérer les fichiers uploadés par l'utilisateur
+function getUserFiles($userEmail) {
+    $filePath = 'utilisateurs.txt';
+    $fileContent = file_get_contents($filePath);
+    $lines = explode("\n", $fileContent);
+    $userFiles = [];
+
+    foreach ($lines as $line) {
+        if (strpos($line, $userEmail) !== false) {
+            $parts = explode(' ', $line);
+            array_shift($parts); // Remove the email part
+            $userFiles = $parts;
+            break;
+        }
+    }
+
+    return $userFiles;
 }
 
 function index(){

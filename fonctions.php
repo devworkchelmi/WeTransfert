@@ -14,10 +14,20 @@ function uploadFichier($userEmail) {
         if ( $target_file == "uploads/") {
             return $upload_ok = 0;
         } else{
-            // Verifie si le fichier existe déjà
-            if (file_exists($target_file)) {
-                $errorMessage = "Le fichier existe déjà.";
-                $upload_ok = 0;
+            // Vérifie si l'utilisateur a déjà téléchargé un fichier avec le même nom d'origine
+            $filePath = 'utilisateurs.txt';
+            if (file_exists($filePath)) {
+                $fileContent = file_get_contents($filePath);
+                $lines = explode("\n", $fileContent);
+                foreach ($lines as $line) {
+                    if (strpos($line, $userEmail) !== false) {
+                        if (strpos($line, $initial_name . '|') !== false) {
+                            $errorMessage = "Vous avez déjà téléchargé un fichier avec ce nom.";
+                            $upload_ok = 0;
+                            break;
+                        }
+                    }
+                }
             }
 
             // Verifie la taille du fichier pour qu'elle ne depasse pas 20mo

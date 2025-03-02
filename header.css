@@ -49,6 +49,20 @@ main {
     background-color: #f4a261; /* Couleur d'accentuation */
     color: #333;
 }
+/*--bouton deconnexion--*/
+#deconnexion {
+    background-color: #2980b9;
+    ; /* Couleur de fond spécifique */
+    color: #f4a261; /* Couleur du texte */
+    font-weight: bold; /* Texte en gras */
+}
+
+#deconnexion:hover {
+    background-color: #2980b9;
+    ; /* Couleur de fond au survol */
+    color: #fff; /* Couleur du texte au survol */
+}
+
 
 /* ---- Responsive ---- */
 @media (max-width: 768px) {

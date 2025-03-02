@@ -10,7 +10,7 @@ function uploadFichier($userEmail) {
         $upload_ok = 1;
         $file_type = strtolower(pathinfo($_FILES["fileToUpload"]["name"],PATHINFO_EXTENSION));
         $target_file = $target_dir . uniqid() . '.' . $file_type; //Pour avoir un nom de fichier différents
-        $initial_name = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $initial_name = basename($_FILES["fileToUpload"]["name"]);
         if ( $target_file == "uploads/") {
             return $upload_ok = 0;
         } else{
@@ -47,7 +47,7 @@ function uploadFichier($userEmail) {
                         $lines = explode("\n", $fileContent);
                         foreach ($lines as &$line) {
                             if (strpos($line, $userEmail) !== false) {
-                                $line = rtrim($line) . ';' .  $initial_name;
+                                $line = rtrim($line) . ';' .  $initial_name . '|' . $target_file;
                                 break;
                             }
                         }
@@ -70,12 +70,29 @@ function uploadFichier($userEmail) {
 }
 
 // fonction supprimer un fichier
-function supprimerFichier($fileName) {
-    $filePath = './uploads/' . $fileName;
+function supprimerFichier($fileName, $userEmail) {
+    $filePath = $fileName;
     // On vérifie si le fichier existe avant de le supprimer
     if (file_exists($filePath)) {
-        //unlink() supprime un fichier
+        // unlink() supprime un fichier
         unlink($filePath);
+
+        // Mise à jour de utilisateurs.txt
+        $filePath = 'utilisateurs.txt';
+        if (file_exists($filePath)) {
+            $fileContent = file_get_contents($filePath);
+            $lines = explode("\n", $fileContent);
+            foreach ($lines as &$line) {
+                if (strpos($line, $userEmail) !== false) {
+                    // Supprimer le chemin du fichier de la ligne
+                    $line = preg_replace('/;[^;]*\|' . preg_quote($fileName, '/') . '/', '', $line);
+                    break;
+                }
+            }
+            $newContent = implode("\n", $lines);
+            file_put_contents($filePath, $newContent);
+        }
+
         return "Le fichier a été supprimé avec succès.";
     } else {
         return "Le fichier n'existe pas.";
@@ -102,20 +119,27 @@ function downloadFile($fileName) {
 // fonction pour récupérer les fichiers uploadés par l'utilisateur
 function getUserFiles($userEmail) {
     $filePath = 'utilisateurs.txt';
-    $fileContent = file_get_contents($filePath);
-    $lines = explode("\n", $fileContent);
-    $userFiles = [];
+    if (file_exists($filePath)) {
+        $fileContent = file_get_contents($filePath);
+        $lines = explode("\n", $fileContent);
+        $userFiles = [];
 
-    foreach ($lines as $line) {
-        if (strpos($line, $userEmail) !== false) {
-            $parts = explode(' ', $line);
-            array_shift($parts); // Remove the email part
-            $userFiles = $parts;
-            break;
+        foreach ($lines as $line) {
+            if (strpos($line, $userEmail) !== false) {
+                $parts = explode(';', $line);
+                // Ignorer les cinq premières données
+                $parts = array_slice($parts, 5);
+                foreach ($parts as $part) {
+                    list($original_name, $stored_name) = explode('|', $part);
+                    $userFiles[] = ['original' => $original_name, 'stored' => $stored_name];
+                }
+                break;
+            }
         }
+        return $userFiles;
+    } else {
+        return [];
     }
-
-    return $userFiles;
 }
 
 function index(){

@@ -3,7 +3,6 @@ require_once './fonctions.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +10,9 @@ if (session_status() == PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="création-compte.css">css formulaire création de compte
+    <link rel="stylesheet" href="création-compte.css"><!--css formulaire création de compte-->
     <link rel="stylesheet" href="header.css"><!--css du header-->
+    <link rel="stylesheet" href="style.css"><!--css global-->
     <title>WeTransfert</title>
 </head>
 <body>

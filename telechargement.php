@@ -36,24 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($userFiles as $file) {
             if ($file['stored'] === $storedName) {
                 $originalName = $file['original'];
-                break;
+                break; 
             }
         }
-        downloadFile($storedName, $originalName);
+        downloadFile($storedName, $originalName, $userEmail);
+        // Recharger la liste des fichiers après téléchargement
+        $userFiles = getUserFiles($userEmail);
         exit;
     }
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<h1>Téléchargement</h1>
 
 <h2>Vos Fichier :</h2>
 
@@ -70,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="hidden" name="download" value="<?= $file['stored'] ?>">
                     <button type="submit">Télécharger</button>
                 </form>
+                <p>Vous avez téléchargé ce fichier <?= $file['downloads'] ?> fois</p>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -79,8 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </ul>
 
 <form id="uploadForm" action="telechargement.php" method="POST" enctype="multipart/form-data">
-    <br>
-    <br>
     <label for="file"> Enregistrer un nouveau fichier </label>
     <br>
     <input type="file" name="fileToUpload" id="fileToUpload">

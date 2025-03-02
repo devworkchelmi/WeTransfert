@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="création-compte.css">css formulaire création de compte
     <link rel="stylesheet" href="header.css"><!--css du header-->
+    <link rel="stylesheet" href="style.css"><!--css du footer-->
     <title>WeTransfert</title>
 </head>
 <body>

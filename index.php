@@ -30,10 +30,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
     $errorMessage = "Identifiants incorrects.";
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"><!--css global-->
+    <title>Accueil</title>
 <body>
     <!-- Image de fond en arrière-plan -->
-    <div class="background-image"></div>
+    <div class="background-image">
 
     <!-- Conteneur du formulaire avec z-index -->
     <div class="container">
@@ -61,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
             <?php endif; ?>
 
         </section>
-
+        </div>
 </body>
 
 </html>

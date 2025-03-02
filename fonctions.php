@@ -104,7 +104,7 @@ function supprimerFichier($fileName, $userEmail) {
     }
 }
 
-//fonction pour télécharger les fichiers
+// fonction pour télécharger les fichiers
 function downloadFile($storedName, $originalName, $userEmail) {
     $filePath = $storedName;
     if (file_exists($filePath)) {
@@ -126,6 +126,7 @@ function downloadFile($storedName, $originalName, $userEmail) {
             file_put_contents($filePath, $newContent);
         }
 
+        // Envoyer les en-têtes HTTP avant de lire le fichier
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename="'.basename($originalName).'"');
@@ -133,6 +134,10 @@ function downloadFile($storedName, $originalName, $userEmail) {
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
         header('Content-Length: ' . filesize($storedName));
+        
+        // Nettoyer le tampon de sortie et envoyer le fichier
+        ob_clean();
+        flush();
         readfile($storedName);
         exit;
     } else {

@@ -45,10 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
-
 ?>
 
-<h2>Vos Fichier :</h2>
+<h2>Vos Fichiers :</h2>
 
 <ul id="fileList">
 <?php if(!empty($userFiles)): ?>

@@ -31,7 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Recharger la liste des fichiers après suppression
         $userFiles = getUserFiles($userEmail);
     } elseif (isset($_POST['download'])) {
-        downloadFile($_POST['download']);
+        $storedName = $_POST['download'];
+        $originalName = '';
+        foreach ($userFiles as $file) {
+            if ($file['stored'] === $storedName) {
+                $originalName = $file['original'];
+                break;
+            }
+        }
+        downloadFile($storedName, $originalName);
         exit;
     }
 }

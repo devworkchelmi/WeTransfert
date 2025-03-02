@@ -43,8 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["identifiant"], $_POST
     <div class="container">
         <h1>Créer un compte</h1>
         
-        <?php if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]): ?> 
-            <h1>Bienvenue <?= htmlspecialchars($_SESSION["identifiant"]) ?></h1>
+        <?php if (isset($_SESSION["connecte"]) && $_SESSION["connecte"]): 
+            header("Location: profil.php"); ?> 
         <?php else: ?>
 
             <form action="traitement-creation-compte.php" method="post">

@@ -94,17 +94,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-
-    <title>Tableau de bord</title>
-</head>
-
 <body>
     <h1>Bienvenue, <?= htmlspecialchars($_SESSION["prenom"]) . " " . htmlspecialchars($_SESSION["nom"]); ?> !</h1>
     <p>Vous êtes connecté.</p>
@@ -127,9 +116,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <input type="submit" value="Mettre à jour">
     </form>
-
-    <br>
-    <a href="logout.php">Se déconnecter</a>
 
     <?php require_once './footer.php'; ?>
 </body>

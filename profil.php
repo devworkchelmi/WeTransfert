@@ -21,7 +21,7 @@ $user_data = null;
 // Chercher les infos de l'utilisateur
 foreach ($utilisateurs as $ligne) {
     $data = explode(";", $ligne);
-    if ($data[2] === $email_utilisateur) {
+    if (isset($data[2]) && $data[2] === $email_utilisateur) {
         $user_data = $data;
         break;
     }
@@ -33,7 +33,11 @@ if (!$user_data) {
 }
 
 // Extraire les données utilisateur
-list($nom, $prenom, $email, $date_naissance, $mdp_hash) = $user_data;
+if (count($user_data) >= 5) {
+    list($nom, $prenom, $email, $date_naissance, $mdp_hash) = $user_data;
+} else {
+    die("Erreur : Données utilisateur incomplètes.");
+}
 
 // Message de confirmation ou d'erreur
 $message = "";

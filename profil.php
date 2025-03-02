@@ -128,9 +128,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="submit" value="Mettre à jour">
     </form>
 
-    <br>
-    <a href="logout.php">Se déconnecter</a>
-
     <?php require_once './footer.php'; ?>
 </body>
 
